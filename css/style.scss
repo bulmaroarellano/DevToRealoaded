@@ -909,10 +909,9 @@ span {
     }
 }
 
-.hover {
+a.hover-dev:hover {
     background-color: #00000009;
     border-color: #00000000;
     box-shadow: none;
     color: #08090a;
-    z-index: 1;
 }
