@@ -1,7 +1,6 @@
-var database = firebase.database();
-var article_id = 1;
-    var article = {
-            'title': 'Conectar Firebase con tu app de JavaScript',
-    }
+let database = firebase.database();
 
-    firebase.database().ref('articles/' + article_id).set(article);
+let devtoRef = database.ref("devTools");
+devtoRef.on("value", (snapshot) => {
+  result = snapshot.val();
+});
