@@ -1,0 +1,21 @@
+[debug] [2021-07-18T07:48:51.281Z] ----------------------------------------------------------------------
+[debug] [2021-07-18T07:48:51.295Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\healc\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2021-07-18T07:48:51.298Z] CLI Version:   9.16.0
+[debug] [2021-07-18T07:48:51.298Z] Platform:      win32
+[debug] [2021-07-18T07:48:51.299Z] Node Version:  v14.17.0
+[debug] [2021-07-18T07:48:51.304Z] Time:          Sun Jul 18 2021 02:48:51 GMT-0500 (hora de verano central)
+[debug] [2021-07-18T07:48:51.314Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2021-07-18T07:48:51.401Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2021-07-18T07:48:51.402Z] > authorizing via signed-in user (healcaraz@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\healc\Documents\desafiokodemia\FRONTENDFINAL\DevToRealoaded
+
