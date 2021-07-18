@@ -30,20 +30,31 @@ $("#nav-month-tab").click(() => {
   let f = new Date();
   let dia = f.getDate();
   let mes = f.getMonth() + 1;
-  let ano = (anio = f.getFullYear());
-  console.log("monthd", mes);
+  let ano = f.getFullYear();
   devtoRef.on("value", (snapshot) => {
     let result = snapshot.val();
-    let total1 = result.filter((e) => {
+    let resultado = result.filter((e) => {
       var [year, month] = e.created_at.split("-");
-      console.log(year, month, ano);
-      return ano === year;
+
+      return (
+        parseInt(mes) === parseInt(month) && parseInt(ano) === parseInt(year)
+      );
     });
-    console.log(total1);
+    console.log("Resultado de Mes y año:", resultado);
   });
 });
 $("#nav-year-tab").click(() => {
-  console.log("year");
+  let f = new Date();
+  let ano = f.getFullYear();
+  devtoRef.on("value", (snapshot) => {
+    let result = snapshot.val();
+    let respuesta = result.filter((e) => {
+      var [year, month] = e.created_at.split("-");
+
+      return parseInt(ano) === parseInt(year);
+    });
+    console.log("Resultado de Mes y año:", respuesta);
+  });
 });
 $("#nav-infinity-tab").click(() => {
   console.log("infinity");
@@ -52,6 +63,26 @@ $("#nav-infinity-tab").click(() => {
 $("#nav-latest-tab").click(() => {
   console.log("latest");
 });
+
+document.getElementById("nav-latest-tab").addEventListener("click", (e) => {
+  //  document.getElementById("nav-latest-tab").innerHTML = "";
+  readPost(e);
+});
+
+function readPost(e) {
+  console.log("Lo que trae", e.target.innerHTML);
+  devtoRef
+    .orderByChild("priority")
+    // .equalTo(e.target.innerHTML)
+    .equalTo("latest")
+    .on("value", function (snapshot) {
+      snapshot.forEach((snap) => {
+        const issu = snap.val();
+        console.log("datos del resultado", issu);
+      });
+    });
+}
+
 //Fin Carlos velasquez
 
 //Inyectamos el html del header
