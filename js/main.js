@@ -10,7 +10,10 @@ devtoRef.on("value", (snapshot) => {
 //16/07/2021
 //Filtro por Feed Week Month Year Infinity Latest
 $("#nav-feed-tab").click(() => {
-  printPost(postCollection);
+  devtoRef.on("value", (snapshot) => {
+    let result = snapshot.val();
+    printPost(result)
+  });
   console.log("Feed");
 });
 
@@ -25,7 +28,9 @@ $("#nav-week-tab").click(() => {
     let total = result.reduce((accum, current) => {
       console.log(accum + current.comments_count);
     }, []);
-    printPost(total);
+    console.log(total1)
+    printPost(total1);
+    
   });
 });
 
@@ -44,6 +49,7 @@ $("#nav-month-tab").click(() => {
       );
     });
 
+    console.log('month')
     console.log("Resultado de Mes y año:", resultado);
     printPost(resultado);
   });
@@ -116,8 +122,8 @@ devtoRef.on("value", (snapshot) => {
 });
 
   function printPost(postCollection) {
-  //$(".cardContainer").innerHTML('')
-  for (item in postCollection) {
+    $(".cardContainer").empty();
+    for (item in postCollection) {
     let { readable_publish_date, reading_time_minutes, title, cover_image, user: {name}, user: {profile_image}, tags, positive_reactions_count } = postCollection[item];
     if(postCollection[item] === postCollection[0]){
         $(".cardContainer").append(`
