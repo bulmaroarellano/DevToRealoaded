@@ -10,6 +10,7 @@ devtoRef.on("value", (snapshot) => {
 //16/07/2021
 //Filtro por Feed Week Month Year Infinity Latest
 $("#nav-feed-tab").click(() => {
+  printPost(postCollection);
   console.log("Feed");
 });
 
@@ -24,6 +25,7 @@ $("#nav-week-tab").click(() => {
     let total = result.reduce((accum, current) => {
       console.log(accum + current.comments_count);
     }, []);
+    printPost(total);
   });
 });
 
@@ -41,7 +43,9 @@ $("#nav-month-tab").click(() => {
         parseInt(mes) === parseInt(month) && parseInt(ano) === parseInt(year)
       );
     });
+
     console.log("Resultado de Mes y año:", resultado);
+    printPost(resultado);
   });
 });
 
@@ -55,9 +59,11 @@ $("#nav-year-tab").click(() => {
 
       return parseInt(ano) === parseInt(year);
     });
+    printPost(respuesta);
     console.log("Resultado de Mes y año:", respuesta);
   });
 });
+
 $("#nav-infinity-tab").click(() => {
   console.log("infinity");
 });
@@ -97,19 +103,20 @@ $(function () {
   $("footer").load("../partials/footer.html");
 });
 
-let postRef = database.ref("/devTools");
+//let postRef = database.ref("/devTools");
 //let postUserRef = database.ref("/db-devto//user");
 let cardContainer = document.getElementById("cardContainer");
 
-
-
-
 //Crear cartas con valores en la DB
-postRef.on("value", (snapshot) => {
+devtoRef.on("value", (snapshot) => {
   $(".cardContainer").empty();
   let postCollection = snapshot.val();
   console.log(postCollection)
+  printPost(postCollection);
+});
 
+  function printPost(postCollection) {
+  //$(".cardContainer").innerHTML('')
   for (item in postCollection) {
     let { readable_publish_date, reading_time_minutes, title, cover_image, user: {name}, user: {profile_image}, tags, positive_reactions_count } = postCollection[item];
     if(postCollection[item] === postCollection[0]){
@@ -220,4 +227,4 @@ postRef.on("value", (snapshot) => {
       `);
     }
   }
-});
+};
