@@ -26,6 +26,7 @@ $("#nav-week-tab").click(() => {
     }, []);
   });
 });
+
 $("#nav-month-tab").click(() => {
   let f = new Date();
   let dia = f.getDate();
@@ -43,6 +44,7 @@ $("#nav-month-tab").click(() => {
     console.log("Resultado de Mes y año:", resultado);
   });
 });
+
 $("#nav-year-tab").click(() => {
   let f = new Date();
   let ano = f.getFullYear();
