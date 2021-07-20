@@ -1,3 +1,30 @@
+//Inyectamos el html del header
+$(function () {
+  $("header").load("../partials/header.html",function(){
+
+    $("#inputSearch").keyup((e) => {
+      console.log( $(e.target).val())
+      let keycode = (e.keyCode ? e.keyCode : e.which);
+      let inputValue = $('#inputSearch').val()
+      if (keycode === 13 && inputValue != "") {
+        e.preventDefault()
+          console.log("tecla enter.")
+          //location.href = `search.html?value=data`
+          getFoundPosts()
+         // console.log("datos desde input" , datos)
+          return false;
+          //getFoundPosts();
+      }
+    })
+  });
+  $("#sidebar").load("../partials/sidebar.html");
+  $("#sidebar-left").load("../partials/sidebar-left.html");
+  $("#content").load("../partials/content.html");
+  $("#sidebar-right").load("../partials/sidebar-right.html");
+  $("footer").load("../partials/footer.html");
+ 
+});
+
 let database = firebase.database();
 let devtoRef = database.ref("devTools");
 
@@ -85,22 +112,11 @@ function readPost(e) {
 
 //Fin Carlos velasquez
 
-//Inyectamos el html del header
-$(function () {
-  $("header").load("../partials/header.html");
-  $("#sidebar").load("../partials/sidebar.html");
-  $("#sidebar-left").load("../partials/sidebar-left.html");
-  $("#content").load("../partials/content.html");
-  $("#sidebar-right").load("../partials/sidebar-right.html");
-  $("footer").load("../partials/footer.html");
-});
+
 
 let postRef = database.ref("/devTools");
 //let postUserRef = database.ref("/db-devto//user");
 let cardContainer = document.getElementById("cardContainer");
-
-
-
 
 //Crear cartas con valores en la DB
 postRef.on("value", (snapshot) => {
@@ -169,3 +185,43 @@ postRef.on("value", (snapshot) => {
           `);
     }
   });
+  const getFoundPosts = () => {
+    console.log("Your life burns faster...")
+    let searchValue = $('#inputSearch').val().toLowerCase()
+  
+    devtoRef.once('value').then( snapshot =>{
+        let result = snapshot.val()
+        let articlesKeys = Object.keys( result )
+        //console.log( articlesKeys ) 
+        let filterResult = articlesKeys.reduce((accum,current) => {
+            let articleTitle = result[current].title.toLowerCase()
+          //console.log( articleTitle)
+         // articleTitle.includes(searchValue) ? console.log("si lo contiene") : console.log( "no lo contiene ")
+  
+            return articleTitle.includes(searchValue) ? {...accum, [current]: result[current]} : accum 
+        },{})
+        return filterResult
+        printPost(filterResult)
+
+    })
+  }
+  //Abrir página search.html cuando se de enter y el input tenga un valor != ""
+// console.log("nunca más")
+// let prueba = $("#inputSearch")
+
+
+// console.log(prueba)
+// $( window ).on( "load", () => { 
+//   prueba.keypress(e => {
+//     let keycode = (e.keyCode ? e.keyCode : e.which);
+//     let inputValue = $('#inputSearch').val()
+//     if (keycode == '13') {
+//         console.log("tecla enter.")
+//         return false;
+//         //getFoundPosts();
+//     }
+//   });
+// } )
+
+
+
