@@ -1,3 +1,30 @@
+//Inyectamos el html del header
+$(function () {
+  $("header").load("../partials/header.html",function(){
+
+    $("#inputSearch").keyup((e) => {
+     // console.log( $(e.target).val())
+      let keycode = (e.keyCode ? e.keyCode : e.which);
+      let inputValue = $('#inputSearch').val()
+      if (keycode === 13 && inputValue != "") {
+        e.preventDefault()
+          //console.log("tecla enter.")
+          //location.href = `search.html?value=data`
+          getFoundPosts()
+         // console.log("datos desde input" , datos)
+          return false;
+          //getFoundPosts();
+      }
+    })
+  });
+  $("#sidebar").load("../partials/sidebar.html");
+  $("#sidebar-left").load("../partials/sidebar-left.html");
+  $("#content").load("../partials/content.html");
+  $("#sidebar-right").load("../partials/sidebar-right.html");
+  $("footer").load("../partials/footer.html");
+ 
+});
+
 let database = firebase.database();
 let devtoRef = database.ref("devTools");
 
@@ -9,9 +36,7 @@ devtoRef.on("value", (snapshot) => {
 //RFE-10
 //16/07/2021
 //Filtro por Feed Week Month Year Infinity Latest
-$("#nav-feed-tab").click(() => {
-    console.log("Feed");
-});
+
 
 $("#nav-week-tab").click(() => {
     console.log("week");
@@ -43,6 +68,51 @@ $("#nav-month-tab").click(() => {
         });
         console.log("Resultado de Mes y año:", resultado);
     });
+
+  devtoRef.on("value", (snapshot) => {
+    let result = snapshot.val();
+    printPost(result)
+  });
+  console.log("Feed");
+});
+
+$("#nav-week-tab").click(() => {
+  console.log("week");
+  devtoRef.on("value", (snapshot) => {
+    let result = snapshot.val();
+    console.log(result);
+    let total1 = result.filter((e) => e.tags === "react");
+    console.log(total1);
+
+    let total = result.reduce((accum, current) => {
+      console.log(accum + current.comments_count);
+    }, []);
+    console.log(total1)
+    printPost(total1);
+    
+  });
+});
+
+$("#nav-month-tab").click(() => {
+  let f = new Date();
+  let dia = f.getDate();
+  let mes = f.getMonth() +1;
+  let ano = f.getFullYear();
+  devtoRef.on("value", (snapshot) => {
+    let result = snapshot.val();
+
+    let resultado = result.filter((e) => {
+      var [year, month] = e.created_at.split("-");
+
+      return (
+        parseInt(mes) === parseInt(month) && parseInt(ano) === parseInt(year)
+      );
+    });
+
+    console.log('month')
+    console.log("Resultado de Mes y año:", resultado);
+    printPost(resultado);
+  });
 });
 
 $("#nav-year-tab").click(() => {
@@ -58,6 +128,7 @@ $("#nav-year-tab").click(() => {
         console.log("Resultado de Mes y año:", respuesta);
     });
 });
+
 $("#nav-infinity-tab").click(() => {
     console.log("infinity");
 });
@@ -88,12 +159,10 @@ function readPost(e) {
 //Fin Carlos velasquez
 
 
-let postRef = database.ref("/devTools");
+
+//let postRef = database.ref("/devTools");
 //let postUserRef = database.ref("/db-devto//user");
 let cardContainer = document.getElementById("cardContainer");
-
-
-
 
 //Crear cartas con valores en la DB
 postRef.on("value", (snapshot) => {
@@ -211,4 +280,41 @@ postRef.on("value", (snapshot) => {
       `);
         }
     }
-});
+
+  const getFoundPosts = () => {
+    //console.log("Your life burns faster...")
+    let searchValue = $('#inputSearch').val().toLowerCase()
+  
+    devtoRef.once('value').then( snapshot =>{
+        let result = snapshot.val()
+        let articlesKeys = Object.keys( result )
+        //console.log( articlesKeys ) 
+        let filterResult = articlesKeys.reduce((accum,current) => {
+            let articleTitle = result[current].title.toLowerCase()
+          //console.log( articleTitle)
+         // articleTitle.includes(searchValue) ? console.log("si lo contiene") : console.log( "no lo contiene ")
+  
+            return articleTitle.includes(searchValue) ? {...accum, [current]: result[current]} : accum 
+        },{})
+        //return filterResult
+        printPost(filterResult)
+
+    })
+  }
+  //Abrir página search.html cuando se de enter y el input tenga un valor != ""
+// console.log("nunca más")
+// let prueba = $("#inputSearch")
+
+
+// console.log(prueba)
+// $( window ).on( "load", () => { 
+//   prueba.keypress(e => {
+//     let keycode = (e.keyCode ? e.keyCode : e.which);
+//     let inputValue = $('#inputSearch').val()
+//     if (keycode == '13') {
+//         console.log("tecla enter.")
+//         return false;
+//         //getFoundPosts();
+//     }
+//   });
+// } )
