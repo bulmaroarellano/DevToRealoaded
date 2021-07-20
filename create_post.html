@@ -58,10 +58,13 @@
                             <div class="article-top-form">
                                 <div class="d-flex justify-content-center">
                                     <div class="list-form-group form-view ml-4">
-                                        <input id="cover-image-input" type="file" accept="image/*" class="w-100 h-100 absolute left-0 right-0 top-0 bottom-0 overflow-hidden opacity-0 cursor-pointer" value="" data-max-file-size-mb="25" />
-                                            <button type="button" class="ibtn btn btn-outline-secondary mt-1"></button>Add a cover image</button>
-                                        </div>
                                         <div class="form-group">
+                                            <a  class="ibtn btn btn-outline-secondary mt-1">
+                                                <input id="cover-image-input" type="file" accept="image/*" class="w-100 absolute left-0 right-0 top-0 bottom-0 overflow-hidden opacity-0 cursor-pointer"/>
+                                          add a cover image</a>
+                                        </div>
+                                       
+                                        <div class="form-group" style="z-index:999 !important;">
                                             <label for="title"></label>
                                             <textarea rows="1" class="itexta form-control border-0" ref="Default" name="title" id="title" placeholder="New post title here..." value=""></textarea>
                                         </div>
@@ -70,7 +73,7 @@
                                              <input id="tags" type="text" class="crayons-textfiel crayons-textfiel--ghost itag form-control border-0 bg-none select2 ff-monospace"  name="tags[]" data-role="tagsinput"  placeholder="Add up to 4 tags... ">
                                                
                                         </div>
-                                    </div>
+                                     </div>
                                 </div> 
                               </div>
                                 <div class="article-form-body mt-3">
