@@ -319,10 +319,11 @@ $(function () {
       let title = $('#title').val();
       let tags = $('#tags').val();
       let image_content= $("image-content");
-   let content = $("#content").val();
+      let content = $("#content").val();
       database.ref(`post/`).set({
               title,
               textArea
+            
           });
           idTask++
       });

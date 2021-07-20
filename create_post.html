@@ -24,7 +24,7 @@
     <div class="container">
 
 
-        <form class="container vh-100  form2" method="post" id="create-post " action="git add .">
+        <form class="container vh-100  form2" method="post" id="create-post " >
             <div class="row d-flex justify-content-end justify-content-md-between ">
                 <div class="col-12 col-md-8 col-lg-8">
                     <div class="navbar navbar-light d-flex justify-content-end justify-content-md-between">
@@ -58,12 +58,12 @@
                             <div class="article-top-form">
                                 <div class="d-flex justify-content-center">
                                     <div class="list-form-group form-view ml-4">
-                                        <div><input id="cover-image-input" type="file" accept="image/*" class="w-100 h-100 absolute left-0 right-0 top-0 bottom-0 overflow-hidden opacity-0 cursor-pointer" data-max-file-size-mb="25">
-                                            <button type="button" class="ibtn btn btn-outline-secondary mt-1">Add a cover image</button>
+                                        <input id="cover-image-input" type="file" accept="image/*" class="w-100 h-100 absolute left-0 right-0 top-0 bottom-0 overflow-hidden opacity-0 cursor-pointer" value="" data-max-file-size-mb="25" />
+                                            <button type="button" class="ibtn btn btn-outline-secondary mt-1"></button>Add a cover image</button>
                                         </div>
                                         <div class="form-group">
                                             <label for="title"></label>
-                                            <textarea rows="1" class="itexta form-control border-0" ref="Default" name="title" id="title" placeholder="New post title here..."></textarea>
+                                            <textarea rows="1" class="itexta form-control border-0" ref="Default" name="title" id="title" placeholder="New post title here..." value=""></textarea>
                                         </div>
                                         <div class="form-group bg-none">
                                             <label for="tags"></label>
@@ -77,12 +77,12 @@
                                     <div class="article-form__toolbar false ">
                                         <div class="flex items-center ">
                                             <button class="upload-file-devto crayons-btn crayons-btn--ghost crayons-btn--icon-left mr-2 fw-normal " tabindex="-1 " type="button ">
-                                                <i class="bi bi-card-image "></i>Upload image<input type="file " id="image-content" class="w-100 h-100 absolute left-0 right-0 top-0 bottom-0 overflow-hidden opacity-0 cursor-pointer otro-input
+                                                <i class="bi bi-card-image "></i>Upload image<input type="file " value="" id="image-content" class="w-100 h-100 absolute left-0 right-0 top-0 bottom-0 overflow-hidden opacity-0 cursor-pointer otro-input
                                                 " multiple accept="image/* " data-max-file-size-mb="25 " aria-label="Upload an image "></button></div>
                                     </div>
                                     <div class="form-group ">
                                         <label for=" "></label>
-                                        <textarea rows="5 " id="content" class="ff-monospace form-control border-0 crayons-textfield crayons-textfield--ghost crayons-article-form__body__field  fs-l h-100" name="content " placeholder="Write your post content here... "></textarea>
+                                        <textarea rows="5 " value="" id="content" class="ff-monospace form-control border-0 crayons-textfield crayons-textfield--ghost crayons-article-form__body__field  fs-l h-100" name="content " placeholder="Write your post content here... "></textarea>
                                     </div>
                                 </div>
                             
