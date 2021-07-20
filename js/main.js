@@ -37,10 +37,11 @@ $("#nav-week-tab").click(() => {
 $("#nav-month-tab").click(() => {
   let f = new Date();
   let dia = f.getDate();
-  let mes = f.getMonth() + 1;
+  let mes = f.getMonth() +1;
   let ano = f.getFullYear();
   devtoRef.on("value", (snapshot) => {
     let result = snapshot.val();
+
     let resultado = result.filter((e) => {
       var [year, month] = e.created_at.split("-");
 
@@ -124,7 +125,7 @@ devtoRef.on("value", (snapshot) => {
   function printPost(postCollection) {
     $(".cardContainer").empty();
     for (item in postCollection) {
-    let { readable_publish_date, reading_time_minutes, title, cover_image, user: {name}, user: {profile_image}, tags, positive_reactions_count } = postCollection[item];
+    let { created_at, readable_publish_date, reading_time_minutes, title, cover_image, user: {name}, user: {profile_image}, tags, positive_reactions_count } = postCollection[item];
     if(postCollection[item] === postCollection[0]){
         $(".cardContainer").append(`
         <div class="tab-content" id="nav-tabContent">
